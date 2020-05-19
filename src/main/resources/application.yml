@@ -1,0 +1,21 @@
+server:
+  port: 8081
+  
+family:
+  products:
+    - 攀升电脑
+    - dell笔记本
+    - 惠普显示器
+    - CK手表
+  mobiles: {key1: iphone7 plus, key2: 华为手机, key3: oppo手机}
+  members:
+    - name: 汪朝华
+      age: 29
+      sex: 男
+    - name: 余玲敏
+      age: 27
+      sex: 女
+  pet:
+    name: 旺旺
+    type: dog
+    age: 15

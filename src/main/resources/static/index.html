@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>websocket测试</title>
+    <style type="text/css">
+        h3,h4{
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+	<h3>WebSocket测试，在<span style="color:red">控制台</span>查看测试信息输出！</h3>
+
+	<script type="text/javascript">
+	    var socket;
+	    if (typeof (WebSocket) == "undefined") {
+	        console.log("遗憾：您的浏览器不支持WebSocket");
+	    } else {
+	        console.log("恭喜：您的浏览器支持WebSocket");
+			//	ws://122.51.148.224:8080/springboot-websocket-1.0/websocket
+			//	ws://localhost:8080/websocket
+	        socket = new WebSocket("ws://122.51.148.224:8080/springboot-websocket-1.0/websocket");
+	        //连接打开事件
+	        socket.onopen = function() {
+	            console.log("Socket 已打开");
+	            var date = new Date();
+	            var year = date.getFullYear();
+	            var month = date.getMonth()+1;
+				if(month<10){
+					month = "0" + month;
+				}
+				var day = date.getDate() < 10 ? "0"+date.getDate() : date.getDate();
+				var hour = date.getHours() < 10 ? "0"+date.getHours() : date.getHours();
+				var minute = date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes();
+				var second = date.getSeconds() < 10 ? "0"+date.getSeconds() : date.getSeconds();
+	            socket.send("zs_" + year + "-" + month + "-" + day + "-" + hour + "-" + minute + "-" + second);
+	        };
+	        //收到消息事件
+	        socket.onmessage = function(msg) {
+	            console.log(msg.data);
+	        };
+	        //连接关闭事件
+	        socket.onclose = function() {
+	            console.log("Socket已关闭");
+	        };
+	        //发生了错误事件
+	        socket.onerror = function() {
+	            alert("Socket发生了错误");
+	        }
+	        //窗口关闭时，关闭连接
+	        window.unload=function() {
+	            socket.close();
+	        };
+	    }
+	</script>
+
+</body>
+</html>
